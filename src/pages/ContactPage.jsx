@@ -1,86 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './CoursesPage.css';
+import React, { useState } from 'react';
+import './ContactPage.css';
 
-const CoursesPage = ({ courses }) => {
-  const location = useLocation();
-  const [filter, setFilter] = useState(location.state?.filter || 'all');
+const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [formStatus, setFormStatus] = useState(null);
 
-  useEffect(() => {
-    document.title = filter === 'all'
-      ? 'Tous les cours - AI Academy'
-      : `Cours ${filter} - AI Academy`;
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    return () => {
-      document.title = 'AI Academy';
-    };
-  }, [filter]);
-
-  const filteredCourses = filter === 'all'
-    ? courses
-    : courses.filter(course => course.level.toLowerCase() === filter.toLowerCase());
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simuler l'envoi du formulaire
+    if (formData.name && formData.email && formData.message) {
+      setFormStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+    } else {
+      setFormStatus('error');
+    }
+  };
 
   return (
     <main className="main-content">
-      <h1>Nos Cours</h1>
-
-      <div className="filter-section">
-        <h3>Filtrer par niveau:</h3>
-        <div className="filter-buttons">
-          <button
-            className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
-            onClick={() => setFilter('all')}
-          >
-            Tous
-          </button>
-          <button
-            className={`filter-btn ${filter === 'débutant' ? 'active' : ''}`}
-            onClick={() => setFilter('débutant')}
-          >
-            Débutant
-          </button>
-          <button
-            className={`filter-btn ${filter === 'intermédiaire' ? 'active' : ''}`}
-            onClick={() => setFilter('intermédiaire')}
-          >
-            Intermédiaire
-          </button>
-          <button
-            className={`filter-btn ${filter === 'avancé' ? 'active' : ''}`}
-            onClick={() => setFilter('avancé')}
-          >
-            Avancé
-          </button>
-        </div>
-      </div>
-
-      <div className="courses-container full-width">
-        {filteredCourses.length > 0 ? (
-          filteredCourses.map(course => (
-            <div className="course-card detailed" key={course.id}>
-              <h3>{course.title}</h3>
-              <p>{course.description}</p>
-              <div className="course-details">
-                <span className="price">{course.price} €</span>
-                <span className="level">{course.level}</span>
-              </div>
-              <ul className="course-features">
-                <li>Accès illimité au contenu</li>
-                <li>Projets pratiques</li>
-                <li>Certificat de compétence</li>
-                <li>Support de la communauté</li>
-              </ul>
-              <Link to={`/courses/${course.id}`} className="btn">
-                Voir les détails
-              </Link>
+      <h1>Contactez-nous</h1>
+      <div className="contact-container">
+        <div className="contact-info">
+          <h2>Nos coordonnées</h2>
+          <div className="contact-details">
+            <div className="contact-item">
+              <h3>Email</h3>
+              <p>contact@aiacademy.com</p>
             </div>
-          ))
-        ) : (
-          <p className="no-courses">Aucun cours ne correspond à votre filtre.</p>
-        )}
+            <div className="contact-item">
+              <h3>Téléphone</h3>
+              <p>+33 1 23 45 67 89</p>
+            </div>
+            <div className="contact-item">
+              <h3>Adresse</h3>
+              <p>123 Rue de l'IA, 75001 Paris</p>
+            </div>
+            <div className="contact-item">
+              <h3>Réseaux sociaux</h3>
+              <p>@AIAcademy sur Twitter, LinkedIn</p>
+            </div>
+          </div>
+        </div>
+        <div className="contact-form-container">
+          <h2>Envoyez-nous un message</h2>
+          {formStatus === 'success' && (
+            <div className="form-success">
+              Merci pour votre message ! Nous vous répondrons bientôt.
+            </div>
+          )}
+          {formStatus === 'error' && (
+            <div className="form-error">
+              Veuillez remplir tous les champs.
+            </div>
+          )}
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Nom</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                value={formData.message}
+                onChange={handleChange}
+              ></textarea>
+            </div>
+            <button type="submit" className="btn">Envoyer</button>
+          </form>
+        </div>
       </div>
     </main>
   );
 };
 
-export default CoursesPage;
+export default ContactPage;

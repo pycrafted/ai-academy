@@ -14,16 +14,6 @@ import Profile from './pages/MemberArea/Profile';
 import MyCourses from './pages/MemberArea/MyCourses';
 import Settings from './pages/MemberArea/Settings';
 
-import './components/Header.css';
-import './components/CourseList.css';
-import './components/Counter.css';
-import './pages/AboutPage.css';
-import './pages/CoursesPage.css';
-import './pages/ContactPage.css';
-import './pages/NotFoundPage.css';
-import './pages/CourseDetailPage.css';
-import './pages/MemberArea/MemberArea.css';
-
 function App() {
   const coursesData = [
     {
