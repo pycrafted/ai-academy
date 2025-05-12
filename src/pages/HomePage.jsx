@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import CourseList from '../components/CourseList';
 import Counter from '../components/Counter';
+import './HomePage.css';
 
 const HomePage = ({ courses }) => {
   const navigate = useNavigate();

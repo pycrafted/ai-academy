@@ -1,0 +1,43 @@
+.hero {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.features {
+  margin: 2rem 0;
+}
+
+.feature-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  min-width: 250px;
+  margin: 1rem 0;
+}
+
+.demo-section {
+  margin: 2rem 0;
+}
+
+.counters {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.concept-explanation {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #e9ecef;
+  border-radius: 5px;
+}
